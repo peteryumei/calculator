@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace caculator
 {
@@ -10,12 +10,42 @@ namespace caculator
     {
         static void Main(string[] args)
         {
-            // The code provided will print ‘Hello World’ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            Console.WriteLine("Welcome to my cool caculator, please enter a string to add:");
 
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+            string input = Console.ReadLine();
+
+            var output = Caculater.Add(input);
+
+            Console.WriteLine(output);
+
+            Console.ReadKey();
+        }
+
+        
+    }
+
+    public static class Caculater
+    {
+        public static Int32 Add(string input)
+        {
+            char[] charSeparators = new char[] { ',' };
+            string[] numbers = input.Split(charSeparators);
+
+            Int32 sum = 0;
+
+            //only take the first two numbers
+            int count = numbers.Count();
+            if (count > 2)
+                count = 2;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (!(Int32.TryParse(numbers[i], out int numberValue)))
+                    numbers[i] = "0";
+                sum = sum + Int32.Parse(numbers[i]);
+            }
+
+            return sum;
         }
     }
 }
