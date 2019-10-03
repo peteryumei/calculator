@@ -51,5 +51,11 @@ namespace CaculatorTests
         {
             Assert.AreEqual(Caculater.Add("1\n2,3"), 6);
         }
+
+        [Test]
+        public void Step5Test1()
+        {
+            Assert.AreEqual(Caculater.Add("2,1001,6"), 8);
+        }
     }
 }

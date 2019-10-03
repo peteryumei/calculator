@@ -46,7 +46,8 @@ namespace caculator
                 {
                     negatives.Add(Int32.Parse(numbers[i]));
                 }
-                sum = sum + Int32.Parse(numbers[i]);
+                if (Int32.Parse(numbers[i]) <= 1000)
+                    sum = sum + Int32.Parse(numbers[i]);
             }
 
             if (negatives.Count > 0)
