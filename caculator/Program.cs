@@ -66,6 +66,23 @@ namespace caculator
         private static string PreProcessInput(string input)
         {
             //check if there is any custom single character length delimiter
+            if (input.StartsWith("//[") && (input.Contains("]\n") || input.Contains("]\\n")))
+            {
+                int length = input.IndexOf("]\n") - 3;
+                string customDelimiter = input.Substring(3, length);
+                //remove leading delimiter section 
+                input = input.Replace("//[" + customDelimiter.ToString() + "]\\n", "").Replace("//[" + customDelimiter.ToString() + "]\n", "");
+                //replace custom delimiter with comma delimter
+                input = input.Replace(customDelimiter, ",");
+                return input;
+            }
+            else
+                return PreProcessInputCustomSingle(input);
+        }
+
+        private static string PreProcessInputCustomSingle(string input)
+        {
+            //check if there is any custom single character length delimiter
             if (input.StartsWith("//") && (input.Contains("\n") || input.Contains("\\n")))
             {
                 char customDelimiter = input[2];
@@ -77,7 +94,7 @@ namespace caculator
             }
             else
                 return input;
-           
+
         }
     }
 }

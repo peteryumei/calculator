@@ -69,5 +69,11 @@ namespace CaculatorTests
         {
             Assert.AreEqual(Caculater.Add("//:\n1:5:6"), 12);
         }
+
+        [Test]
+        public void Step7Test2()
+        {
+            Assert.AreEqual(Caculater.Add("//[***]\n11***22***33"), 66);
+        }
     }
 }
