@@ -33,10 +33,7 @@ namespace caculator
 
             Int32 sum = 0;
 
-            //only take the first two numbers
             int count = numbers.Count();
-            if (count > 2)
-                count = 2;
 
             for (int i = 0; i < count; i++)
             {
@@ -44,7 +41,7 @@ namespace caculator
                     numbers[i] = "0";
                 sum = sum + Int32.Parse(numbers[i]);
             }
-
+    
             return sum;
         }
     }
