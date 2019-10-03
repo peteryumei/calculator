@@ -28,6 +28,8 @@ namespace caculator
     {
         public static Int32 Add(string input)
         {
+            input = input.Replace("\\n", ",").Replace("\n", ",");
+
             char[] charSeparators = new char[] { ',' };
             string[] numbers = input.Split(charSeparators);
 
