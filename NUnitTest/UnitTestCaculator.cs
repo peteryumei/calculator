@@ -19,7 +19,7 @@ namespace CaculatorTests
         [Test]
         public void Step1Test2()
         {
-            Assert.AreEqual(Caculater.Add("1,5000"), 5001);
+            Assert.AreEqual(Caculater.Add("1,5000"), 1);
         }
 
         [Test]
@@ -56,6 +56,18 @@ namespace CaculatorTests
         public void Step5Test1()
         {
             Assert.AreEqual(Caculater.Add("2,1001,6"), 8);
+        }
+
+        [Test]
+        public void Step6Test1()
+        {
+            Assert.AreEqual(Caculater.Add("//;\n2;5"), 7);
+        }
+
+        [Test]
+        public void Step6Test2()
+        {
+            Assert.AreEqual(Caculater.Add("//:\n1:5:6"), 12);
         }
     }
 }
