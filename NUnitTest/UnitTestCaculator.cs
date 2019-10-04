@@ -71,9 +71,15 @@ namespace CaculatorTests
         }
 
         [Test]
-        public void Step7Test2()
+        public void Step7Test1()
         {
             Assert.AreEqual(Caculater.Add("//[***]\n11***22***33"), 66);
+        }
+
+        [Test]
+        public void Step8Test1()
+        {
+            Assert.AreEqual(Caculater.Add("//[*][!!][r9r]\n11r9r22*33!!44"), 110);
         }
     }
 }

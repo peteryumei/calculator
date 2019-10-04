@@ -29,7 +29,7 @@ namespace caculator
     {
         public static Int32 Add(string input)
         {
-            input = PreProcessInput(input);
+            input = ProcessCustomDelimiter(input);
 
             input = input.Replace("\\n", ",").Replace("\n", ",");
 
@@ -63,9 +63,37 @@ namespace caculator
         }
 
         //find and replace custom delimiter with comma delimter  
-        private static string PreProcessInput(string input)
+        private static string ProcessCustomDelimiter(string input)
         {
-            //check if there is any custom single character length delimiter
+            //check if there is multiple custom delimiters with any length charaters
+            if (input.Contains("]["))
+            { 
+                int length = input.IndexOf("\n") - 2;
+                string delimiterSection = input.Substring(2, length);
+                //remove leading delimiter section 
+                input = input.Replace("//" + delimiterSection + "\\n", "").Replace("//" + delimiterSection + "\n", "");
+
+                //remove leading "[" and traling "]"
+                delimiterSection = delimiterSection.Substring(1, delimiterSection.Length - 1);
+                delimiterSection = delimiterSection.Replace("]", "");
+                string[] delimiters = delimiterSection.Split('[');
+   
+                //replace custom delimiter with comma delimters
+                foreach (string delimiter in delimiters)
+                {
+                    input = input.Replace(delimiter, ",");
+                }
+                   
+                return input;
+            }
+            
+            else
+                return ProcessAnyLengthSingleDelimiter(input);
+        }
+
+        private static string ProcessAnyLengthSingleDelimiter(string input)
+        {
+            //check if there is any custom delimiter with any length charaters
             if (input.StartsWith("//[") && (input.Contains("]\n") || input.Contains("]\\n")))
             {
                 int length = input.IndexOf("]\n") - 3;
@@ -77,10 +105,10 @@ namespace caculator
                 return input;
             }
             else
-                return PreProcessInputCustomSingle(input);
+                return ProcessSingleCharDelimiter(input);
         }
 
-        private static string PreProcessInputCustomSingle(string input)
+        private static string ProcessSingleCharDelimiter(string input)
         {
             //check if there is any custom single character length delimiter
             if (input.StartsWith("//") && (input.Contains("\n") || input.Contains("\\n")))
